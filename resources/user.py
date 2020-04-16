@@ -1,6 +1,5 @@
 from flask_restful import Resource, reqparse
 from models.user import UserModel
-from flask_jwt import jwt_required
 
 class UserRegister(Resource):
 
@@ -14,7 +13,6 @@ class UserRegister(Resource):
                         type=str,
                         required=True,
                         help="This field cannot be empty")
-    @jwt_required()
     def post(self):
         data = UserRegister.parser.parse_args()
         user = UserModel.find_by_username(data['username'])
